@@ -38,11 +38,11 @@ coverage/
 htmlcov/
 
 # 环境变量文件
-#.env
-#.env.local
-#.env.development.local
-#.env.test.local
-#.env.production.local
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # node.js / npm 相关（如果你有前端）
 node_modules/
