@@ -3,4 +3,10 @@ name = "weatherllm"
 version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "langchain>=0.3.26",
+    "langchain-core>=0.3.69",
+    "langchain-openai>=0.3.28",
+    "langsmith>=0.4.6",
+    "python-dotenv>=1.1.1",
+]
