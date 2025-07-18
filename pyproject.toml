@@ -4,9 +4,12 @@ version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.12"
 dependencies = [
-    "langchain>=0.3.26",
+    "langchain[google-genai]>=0.3.26",
     "langchain-core>=0.3.69",
     "langchain-openai>=0.3.28",
     "langsmith>=0.4.6",
     "python-dotenv>=1.1.1",
+    "pandas>=2.3.1",
+    "pandas-stubs==2.3.0.250703",
+    "openpyxl>=3.1.5",
 ]
