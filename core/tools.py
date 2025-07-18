@@ -1,9 +1,13 @@
+import os
 from langchain_core.tools import tool
 from core.weather import BASE_URL, make_nws_request, format_alert, format_forecast
 from core.division import init_city_codes
 
 GAODE_ACCESS_KEY = '819e27eccea420a48463e6f63f0386b5'
-file_path = "./data/AMap_adcode_citycode.xlsx"
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+file_path = os.path.join(current_dir, "..", "data", "AMap_adcode_citycode.xlsx")
+
 
 divisions = init_city_codes(file_path)
 
@@ -26,7 +30,7 @@ def get_citycode(city_name: str) -> str:
     return None
 
 @tool
-async def get_alerts(city_name: str) -> str:
+def get_alerts(city_name: str) -> str:
     """
     查询输入城市的当天的天气情况
     Args:
@@ -34,7 +38,7 @@ async def get_alerts(city_name: str) -> str:
     """
 
     url = f"{BASE_URL}?key={GAODE_ACCESS_KEY}&city={get_citycode(city_name)}&extensions=base"
-    data = await make_nws_request(url)
+    data = make_nws_request(url)
 
     if not data or "lives" not in data:
         return "Unable to fetch alerts or no alerts found."
@@ -46,7 +50,7 @@ async def get_alerts(city_name: str) -> str:
     return "\n---\n".join(alerts)
 
 @tool
-async def get_forecast(city_name: str) -> str:
+def get_forecast(city_name: str) -> str:
     """
     获取输入城市未来三天的天气预报
     Args:
@@ -54,13 +58,10 @@ async def get_forecast(city_name: str) -> str:
     """
     # First get the forecast grid endpoint
     url = f"{BASE_URL}?key={GAODE_ACCESS_KEY}&city={get_citycode(city_name)}&extensions=all"
-    data = await make_nws_request(url)
+    data = make_nws_request(url)
 
-    if not data or "forecast" not in data:
+    if not data or "forecasts" not in data:
         return "Unable to fetch alerts or no alerts found."
 
-    if not data["forecast"]:
-        return "No active alerts for this state."
-
-    forecast = format_forecast(data["forecast"])
+    forecast = format_forecast(data["forecasts"][0])
     return "\n---\n".join(forecast)

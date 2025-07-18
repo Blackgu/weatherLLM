@@ -24,7 +24,7 @@ if "LANGSMITH_PROJECT_NAME" not in os.environ:
         prompt="Please enter your LangSmith project name: "
     )
 
-if "OPENAI_API_KEY" not in os.environ:
-    os.environ["OPENAI_API_KEY"] = getpass.getpass(
-        prompt="Please enter your Openai API key: "
+if "DASHSCOPE_API_KEY" not in os.environ:
+    os.environ["DASHSCOPE_API_KEY"] = getpass.getpass(
+        prompt="Please enter your DASHSCOPE API key: "
     )

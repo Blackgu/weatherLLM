@@ -4,16 +4,16 @@ import httpx
 BASE_URL = "https://restapi.amap.com/v3/weather/weatherInfo"
 USER_AGENT = "weather-app/1.0"
 
-async def make_nws_request(url: str) -> dict[str, Any] | None:
+def make_nws_request(url: str) -> dict[str, Any] | None:
     """Make a request to the NWS API with proper error handling."""
     headers = {
         "User-Agent": USER_AGENT,
         "Accept": "application/geo+json"
     }
 
-    async with httpx.AsyncClient() as client:
+    with httpx.Client() as client:
         try:
-            response = await client.get(url, headers=headers, timeout=30)
+            response = client.get(url, headers=headers, timeout=30)
             response.raise_for_status()
             return response.json()
         except Exception:
