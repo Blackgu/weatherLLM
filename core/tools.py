@@ -3,7 +3,7 @@ from langchain_core.tools import tool
 from core.weather import BASE_URL, make_nws_request, format_alert, format_forecast
 from core.division import init_city_codes
 
-GAODE_ACCESS_KEY = '819e27eccea420a48463e6f63f0386b5'
+GAODE_ACCESS_KEY = os.getenv("GAODE_ACCESS_KEY")
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 file_path = os.path.join(current_dir, "..", "data", "AMap_adcode_citycode.xlsx")
