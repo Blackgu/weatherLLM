@@ -50,18 +50,29 @@ def get_alerts(city_name: str) -> str:
     return "\n---\n".join(alerts)
 
 @tool
-def get_forecast(city_name: str) -> str:
+def get_forecast(city_name: str, days: int = 3) -> str:
     """
-    获取输入城市未来三天的天气预报
+    获取输入城市未来指定天数的天气预报
+
     Args:
         city_name: 城市名称，例如：北京市
+        days: 需要获取的未来天数，默认为3天
+
+    Returns:
+        返回包含未来天气预报信息的字符串
     """
-    # First get the forecast grid endpoint
+    # 构建请求URL，包含基础URL、高德API访问密钥和城市编码
     url = f"{BASE_URL}?key={GAODE_ACCESS_KEY}&city={get_citycode(city_name)}&extensions=all"
+
+    # 发起网络请求获取天气数据
     data = make_nws_request(url)
 
+    # 判断获取的数据是否为空或者不包含预报信息
     if not data or "forecasts" not in data:
         return "Unable to fetch alerts or no alerts found."
 
-    forecast = format_forecast(data["forecasts"][0])
+    # 格式化预报数据，截取指定天数的预报信息
+    forecast = format_forecast(data["forecasts"][0], days)
+
+    # 将格式化后的预报信息以换行符连接成最终返回结果
     return "\n---\n".join(forecast)

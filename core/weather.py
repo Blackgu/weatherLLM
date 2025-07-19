@@ -32,11 +32,11 @@ def format_alert(live: dict) -> str:
     Humidity: {live.get('humidity', 'Unknown')}
     """
 
-def format_forecast(forecast: dict) -> str:
+def format_forecast(forecast: dict, days: int = 3) -> str:
     """
     Format an alert feature into a readable string.
     """
-    casts = forecast['casts']
+    casts = forecast['casts'][:days]
 
     result = f"""
     Area: {forecast.get('province', 'Unknown')} + "-" + {forecast.get('city', 'Unknown')}

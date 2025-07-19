@@ -8,7 +8,7 @@ tools = [get_alerts, get_forecast]
 model_with_tools = model.bind_tools(tools=tools)
 
 if __name__ == '__main__':
-    query = "杭州未来3天的天气如何？"
+    query = "杭州未来一周的天气如何？"
     messages = [HumanMessage(content=query)]
 
     ai_msg = model_with_tools.invoke(messages)
