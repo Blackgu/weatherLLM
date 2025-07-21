@@ -1,10 +1,6 @@
-from langchain_openai import ChatOpenAI
 from langchain_community.chat_models import ChatTongyi
-from openai import project
-
 
 def get_model():
     model = ChatTongyi(model="qwen-turbo",
-                       temperature=1,
-                       project="weatherLLM")
+                       top_p=1)
     return model
