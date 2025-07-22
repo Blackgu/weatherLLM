@@ -5,9 +5,7 @@ from core.division import init_city_codes
 
 GAODE_ACCESS_KEY = os.getenv("GAODE_ACCESS_KEY")
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(current_dir, "..", "data", "AMap_adcode_citycode.xlsx")
-
+file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../..", "data", "AMap_adcode_citycode.xlsx"))
 
 divisions = init_city_codes(file_path)
 

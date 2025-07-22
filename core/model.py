@@ -1,9 +1,9 @@
 from langchain_community.chat_models import ChatTongyi
 from langchain.prompts import PromptTemplate
 from langchain.agents import initialize_agent, AgentType, AgentExecutor
-from core.tools import get_forecast_weather, get_current_condition_weather, get_tomorrow_weather
-from core.china_tools import (get_china_alerts_city, get_china_alerts_address,
-                              get_china_forecast_city, get_china_forecast_address)
+from core.tools.foreign_weather_tools import get_forecast_weather, get_current_condition_weather, get_tomorrow_weather
+from core.tools.china_weather_tools import (get_china_alerts_city, get_china_alerts_address,
+                                            get_china_forecast_city, get_china_forecast_address)
 
 tools = [get_forecast_weather, get_current_condition_weather, get_tomorrow_weather,
          get_china_alerts_city, get_china_alerts_address,
