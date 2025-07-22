@@ -24,9 +24,28 @@ def get_current_condition_weather(latitude: float, longitude: float) -> str | No
     return json.dumps(data)
 
 @tool
+def get_tomorrow_weather(latitude: float, longitude: float) -> str:
+    """
+    查询城市地区（除中国外的其他国家）的明天的天气预报
+    Args:
+        latitude: 纬度，例如：39.90403
+        longitude: 经度，例如：116.407526
+        days: 需要获取的天数，默认为3
+    Returns:
+        返回包含未来天气预报信息的字符串
+    """
+    url = f"{FORECAST_DAYS_URL}?key={GEMINI_API_KEY}&location.latitude={latitude}&location.longitude={longitude}&days=2"
+    data = make_weather_request(url)
+    if not data:
+        return "Unable to fetch forecast weather data."
+
+    tomorrow_cast = data["forecastDays"][1]
+    return json.dumps(tomorrow_cast)
+
+@tool
 def get_forecast_weather(latitude: float, longitude: float, days: int = 3) -> str | None:
     """
-    查询城市地区（除中国外的其他国家）的未来几天（不包含今天）的天气预报
+    查询城市地区（除中国外的其他国家）的未来几天的天气预报
     Args:
         latitude: 纬度，例如：39.90403
         longitude: 经度，例如：116.407526

@@ -1,6 +1,6 @@
 import os
 from langchain_core.tools import tool
-from core.weather import GAODE_BASE_URL, make_weather_request, format_alert, format_forecast
+from core.weather import GAODE_BASE_URL, make_weather_request
 from core.division import init_city_codes
 
 GAODE_ACCESS_KEY = os.getenv("GAODE_ACCESS_KEY")
@@ -114,3 +114,36 @@ def get_china_forecast_address(city_name: str, division_name: str = None, days: 
 
     # 将格式化后的预报信息以换行符连接成最终返回结果
     return "\n---\n".join(forecast)
+
+def format_alert(live: dict) -> str:
+    """
+    Format an alert feature into a readable string.
+    """
+    return f"""
+    Area: {live.get('province', 'Unknown')} + "-" + {live.get('city', 'Unknown')}
+    Weather: {live.get('weather', 'Unknown')}
+    Temperature: {live.get('temperature', 'Unknown')}
+    Wind-direction: {live.get('winddirection', 'Unknown')}
+    Windpower: {live.get('windpower', 'Unknown')}
+    Humidity: {live.get('humidity', 'Unknown')}
+    """
+
+def format_forecast(forecast: dict, days: int = 3) -> str:
+    """
+    Format an alert feature into a readable string.
+    """
+    casts = forecast['casts'][:days]
+
+    result = f"""
+    Area: {forecast.get('province', 'Unknown')} + "-" + {forecast.get('city', 'Unknown')}
+    """
+    for cast in casts:
+        result += f"""
+        Date: {cast.get('date', 'Unknown')} {cast.get('week', 'Unknown')}
+        DayWeather: {cast.get('dayweather', 'Unknown')} {cast.get('daytemp', 'Unknown')}
+        DayWind: {cast.get('daywind', 'Unknown')} {cast.get('daypower', 'Unknown')}
+        NightWeather: {cast.get('nightweather', 'Unknown')} {cast.get('nighttemp', 'Unknown')}
+        NightWind: {cast.get('nightwind', 'Unknown')} {cast.get('nightpower', 'Unknown')}
+        """
+
+    return result
