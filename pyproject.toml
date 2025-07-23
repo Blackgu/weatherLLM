@@ -14,4 +14,5 @@ dependencies = [
     "openpyxl>=3.1.5",
     "langchain-community>=0.3.27",
     "dashscope>=1.23.8",
+    "gradio>=5.38.0",
 ]

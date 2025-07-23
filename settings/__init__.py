@@ -27,7 +27,7 @@ if "DASHSCOPE_API_KEY" not in os.environ:
         prompt="Please enter your DASHSCOPE API key: "
     )
 
-if "GEMINI_API_KEY" not in os.environ:
-    os.environ["GEMINI_API_KEY"] = getpass.getpass(
-        prompt="Please enter your GEMINI API KEY: "
+if "GOOGLE_API_KEY" not in os.environ:
+    os.environ["GOOGLE_API_KEY"] = getpass.getpass(
+        prompt="Please enter your GOOGLE_API_KEY: "
     )

@@ -77,7 +77,7 @@ def get_china_forecast_city(city_name: str, days: int = 3) -> str:
         city_name: 城市名称，例如：北京市
         days: 需要获取的天数，默认为3天
     """
-    return get_china_forecast_address.invoke(city_name, days)
+    return get_china_forecast_address.invoke({"city_name": city_name, "days": days})
 
 @tool
 def get_china_forecast_address(city_name: str, division_name: str = None, days: int = 3) -> str:

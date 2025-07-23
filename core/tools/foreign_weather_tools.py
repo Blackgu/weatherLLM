@@ -1,11 +1,10 @@
 import json
 import os
-from datetime import datetime
 
 from langchain_core.tools import tool
 from core.weather import (CURRENT_CONDITION_URL, FORECAST_DAYS_URL, make_weather_request)
 
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+GEMINI_API_KEY = os.environ.get("GOOGLE_API_KEY")
 
 @tool
 def get_current_condition_weather(latitude: float, longitude: float) -> str | None:
