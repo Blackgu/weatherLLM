@@ -4,7 +4,7 @@ import os
 from langchain_core.tools import tool
 from core.weather import (CURRENT_CONDITION_URL, FORECAST_DAYS_URL, make_weather_request)
 
-GEMINI_API_KEY = os.environ.get("GOOGLE_API_KEY")
+GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
 
 @tool
 def get_current_condition_weather(latitude: float, longitude: float) -> str | None:
@@ -16,7 +16,7 @@ def get_current_condition_weather(latitude: float, longitude: float) -> str | No
     Returns:
         返回包含当前天气信息的字符串
     """
-    url = f"{CURRENT_CONDITION_URL}?key={GEMINI_API_KEY}&location.latitude={latitude}&location.longitude={longitude}"
+    url = f"{CURRENT_CONDITION_URL}?key={GOOGLE_API_KEY}&location.latitude={latitude}&location.longitude={longitude}"
     data = make_weather_request(url)
     if not data:
         return "Unable to fetch current weather data."
@@ -33,7 +33,7 @@ def get_tomorrow_weather(latitude: float, longitude: float) -> str:
     Returns:
         返回包含未来天气预报信息的字符串
     """
-    url = f"{FORECAST_DAYS_URL}?key={GEMINI_API_KEY}&location.latitude={latitude}&location.longitude={longitude}&days=2"
+    url = f"{FORECAST_DAYS_URL}?key={GOOGLE_API_KEY}&location.latitude={latitude}&location.longitude={longitude}&days=2"
     data = make_weather_request(url)
     if not data:
         return "Unable to fetch forecast weather data."
@@ -52,7 +52,7 @@ def get_forecast_weather(latitude: float, longitude: float, days: int = 3) -> st
     Returns:
         返回包含未来天气预报信息的字符串
     """
-    url = f"{FORECAST_DAYS_URL}?key={GEMINI_API_KEY}&location.latitude={latitude}&location.longitude={longitude}&days={days}"
+    url = f"{FORECAST_DAYS_URL}?key={GOOGLE_API_KEY}&location.latitude={latitude}&location.longitude={longitude}&days={days}"
     data = make_weather_request(url)
     if not data:
         return "Unable to fetch forecast weather data."
